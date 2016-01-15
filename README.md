@@ -1,9 +1,13 @@
 # ps.easemob.com
-+npm install -g grunt-cli
-+npm install -g bower
+## Requirement
+1. install node.js
+2. npm install -g grunt-cli
+3. npm install -g bower
 
-+npm install
-+grunt bower-install-simple
-+grunt build:dev
-+grunt build:dist
-+npm start
+## Install Guide
+1. Enter the root path
+2. npm install
+3. grunt bower-install-simple
+4. grunt build:dev
+5. grunt build:dist
+6. npm start
