@@ -60,6 +60,11 @@ module.exports = {
             {src: "bower_components/ng-grid/build/ng-grid.min.js", dest: "src/vendor/modules/ng-grid/ng-grid.min.js"},
             {src: "bower_components/ng-grid/ng-grid.min.css", dest: "src/vendor/modules/ng-grid/ng-grid.min.css"},
 
+            {src: "bower_components/angular-ui-grid/ui-grid.min.js", dest: "src/vendor/modules/angular-ui-grid/ui-grid.min.js"},
+            {src: "bower_components/angular-ui-grid/ui-grid.min.css", dest: "src/vendor/modules/angular-ui-grid/ui-grid.min.css"},
+            {src: "bower_components/angular-ui-grid/ui-grid.ttf", dest: "src/vendor/modules/angular-ui-grid/ui-grid.ttf"},
+            {src: "bower_components/angular-ui-grid/ui-grid.woff", dest: "src/vendor/modules/angular-ui-grid/ui-grid.woff"},
+
             {src: "bower_components/videogular/videogular.min.js", dest: "src/vendor/modules/videogular/videogular.min.js"},
             {src: "bower_components/videogular-controls/controls.min.js", dest: "src/vendor/modules/videogular/plugins/controls.min.js"},
             {src: "bower_components/videogular-buffering/buffering.min.js", dest: "src/vendor/modules/videogular/plugins/buffering.min.js"},

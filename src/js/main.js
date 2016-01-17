@@ -12,8 +12,8 @@ angular.module('app')
 
       // config
       $scope.app = {
-        name: 'Angulr',
-        version: '1.3.3',
+        name: 'Easemob PSP',
+        version: '0.0.9',
         // for chart colors
         color: {
           primary: '#7266ba',
@@ -55,11 +55,13 @@ angular.module('app')
 
       // angular translate
       $scope.lang = { isopen: false };
-      $scope.langs = {en:'English', de_DE:'German', it_IT:'Italian'};
-      $scope.selectLang = $scope.langs[$translate.proposedLanguage()] || "English";
+      $scope.langs = {'zh-cn':'中文' , 'en':'English'};
+      $scope.selectLang = $scope.langs[$translate.proposedLanguage()] || "中文";
+      $scope.selectLangKey = $translate.proposedLanguage() || "zh-cn";
       $scope.setLang = function(langKey, $event) {
         // set the current lang
         $scope.selectLang = $scope.langs[langKey];
+        $scope.selectLangKey = langKey;
         // You can change the language during runtime
         $translate.use(langKey);
         $scope.lang.isopen = !$scope.lang.isopen;

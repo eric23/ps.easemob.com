@@ -55,6 +55,13 @@ angular.module('app')
                   ]
               },
               {
+                  name: 'ui.grid',
+                  files: [
+                      'vendor/modules/angular-ui-grid/ui-grid.min.js',
+                      'vendor/modules/angular-ui-grid/ui-grid.min.css'
+                  ]
+              },
+              {
                   name: 'ui.select',
                   files: [
                       'vendor/modules/angular-ui-select/select.min.js',

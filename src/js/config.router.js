@@ -15,10 +15,16 @@ angular.module('app')
   .config(
     [          '$stateProvider', '$urlRouterProvider',
       function ($stateProvider,   $urlRouterProvider) {
-          
+          // Default page
           $urlRouterProvider
-              .otherwise('/app/dashboard-v1');
+              .otherwise('/app/dashboard-v2');
+
+          // Page routes
           $stateProvider
+              .state('app.function01', {
+                  url: '/function01',
+                  templateUrl: 'tpl/app_function01.html'
+              })
               .state('app', {
                   abstract: true,
                   url: '/app',
@@ -169,7 +175,7 @@ angular.module('app')
                   resolve: {
                       deps: ['$ocLazyLoad',
                         function( $ocLazyLoad ){
-                          return $ocLazyLoad.load('ngGrid').then(
+                          return $ocLazyLoad.load('ui.grid').then(
                               function(){
                                   return $ocLazyLoad.load('js/controllers/grid.js');
                               }

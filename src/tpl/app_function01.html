@@ -1,0 +1,32 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3" translate="app.func01.FUNCNAME"></h1>
+</div>
+<div class="wrapper-md">
+  <div class="panel panel-default">
+    <div class="panel-heading" translate="app.func01.GRIDNAME"></div>
+    <div class="table-responsive">
+      <table ui-jq="dataTable" ui-options="{
+          sAjaxSource: 'vendor/jquery/datatables/datatable.json',
+          aoColumns: [
+            { mData: 'engine' },
+            { mData: 'browser' },
+            { mData: 'platform' },
+            { mData: 'version' },
+            { mData: 'grade' }
+          ]
+        }" class="table table-striped m-b-none">
+        <thead>
+          <tr>
+            <th  style="width:20%" translate="app.func01.NAME"></th>
+            <th  style="width:25%" translate="app.func01.NAME"></th>
+            <th  style="width:25%" translate="app.func01.NAME"></th>
+            <th  style="width:15%" translate="app.func01.NAME"></th>
+            <th  style="width:15%" translate="app.func01.NAME"></th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

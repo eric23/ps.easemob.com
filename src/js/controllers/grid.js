@@ -48,6 +48,16 @@ app.controller('GridDemoCtrl', ['$scope', '$http', function($scope, $http) {
           $scope.getPagedDataAsync($scope.pagingOptions.pageSize, $scope.pagingOptions.currentPage, $scope.filterOptions.filterText);
         }
     }, true);
+    $scope.$watch('selectLangKey', function (newVal, oldVal) {
+        if (newVal !== oldVal) {
+          $scope.gridOptions.columnDefs = [
+            {field: 'name', displayName: 'app.func01.NAME', headerCellFilter: 'translate' },
+            {field: 'allowance', displayName: 'app.func01.ALLOWANCE', headerCellFilter: 'translate'}
+          ];
+          $scope.gridOptions.i18n = newVal;
+        }
+    }, true);
+
 
     $scope.gridOptions = {
         data: 'myData',
@@ -55,6 +65,11 @@ app.controller('GridDemoCtrl', ['$scope', '$http', function($scope, $http) {
         showFooter: true,
         totalServerItems: 'totalServerItems',
         pagingOptions: $scope.pagingOptions,
-        filterOptions: $scope.filterOptions
+        filterOptions: $scope.filterOptions,
+        columnDefs: [
+            {field: 'name', displayName: 'app.func01.NAME', headerCellFilter: 'translate' },
+            {field: 'allowance', displayName: 'app.func01.ALLOWANCE', headerCellFilter: 'translate'}
+        ],
+        i18n: $scope.selectLangKey
     };
 }]);

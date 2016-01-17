@@ -15,13 +15,13 @@
   "aside": {
     "nav": {
       "ps": {
-        "HEADER": "Navigation",
-        "FUNC01": "Function01"
+        "HEADER": "导航",
+        "FUNC01": "功能1"
       },
-      "HEADER": "Navigation",
-      "DASHBOARD": "Dashboard",
-      "CALENDAR": "Calendar",
-      "EMAIL": "Email",
+      "HEADER": "导航",
+      "DASHBOARD": "仪表盘",
+      "CALENDAR": "日历",
+      "EMAIL": "邮件",
       "WIDGETS": "Widgets",
       "components": {
         "COMPONENTS": "Components",
@@ -73,11 +73,11 @@
   },
   "app": {
     "func01": {
-      "FUNCNAME": "Function 01",
-      "GRIDNAME": "Query Result",
-      "NAME": "Name",
-      "ALLOWANCE": "Allowance",
-      "OPERATION": "Operation"
+      "FUNCNAME": "功能01",
+      "GRIDNAME": "查询结果",
+      "NAME": "名称",
+      "ALLOWANCE": "许可",
+      "OPERATION": "操作"
     }
   }
 }
