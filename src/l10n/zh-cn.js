@@ -16,7 +16,7 @@
     "nav": {
       "ps": {
         "HEADER": "导航",
-        "FUNC01": "功能1"
+        "PRICE": "价格目录"
       },
       "HEADER": "导航",
       "DASHBOARD": "仪表盘",
@@ -72,12 +72,22 @@
     "RELEASE": "Release"
   },
   "app": {
+    "common": {
+      "GRID": "查询结果",
+      "OPERATIONS": "操作",
+      "OPERATIONS_DEL": "删除",
+      "OPERATIONS_EDIT": "编辑",
+      "OPERATIONS_EXP": "导出",
+      "OPERATIONS_APPLY": "应用",
+      "OPERATIONS_SEARCH": "查询"
+    },
+
     "func01": {
-      "FUNCNAME": "功能01",
-      "GRIDNAME": "查询结果",
-      "NAME": "名称",
-      "ALLOWANCE": "许可",
-      "OPERATION": "操作"
+      "data": {
+        "COL_PROJECT": "项目",
+        "COL_TASK": "任务",
+        "COL_DATE": "日期"
+      }
     }
   }
 }

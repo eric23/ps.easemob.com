@@ -16,7 +16,7 @@
     "nav": {
       "ps": {
         "HEADER": "Navigation",
-        "FUNC01": "Function01"
+        "PRICE": "Price List"
       },
       "HEADER": "Navigation",
       "DASHBOARD": "Dashboard",
@@ -72,12 +72,22 @@
     "RELEASE": "Release"
   },
   "app": {
+    "common": {
+      "GRID": "Grid",
+      "OPERATIONS": "Operations",
+      "OPERATIONS_DEL": "Delete",
+      "OPERATIONS_EDIT": "Edit",
+      "OPERATIONS_EXP": "Export",
+      "OPERATIONS_APPLY": "Apply",
+      "OPERATIONS_SEARCH": "Search"
+    },
+
     "func01": {
-      "FUNCNAME": "Function 01",
-      "GRIDNAME": "Query Result",
-      "NAME": "Name",
-      "ALLOWANCE": "Allowance",
-      "OPERATION": "Operation"
+      "data": {
+        "COL_PROJECT": "Project",
+        "COL_TASK": "Task",
+        "COL_DATE": "Date"
+      }
     }
   }
 }

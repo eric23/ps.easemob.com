@@ -1,4 +1,4 @@
-app.controller('GridDemoCtrl', ['$scope', '$http', function($scope, $http) {
+app.controller('GridDemoCtrl', ['$scope', '$http', '$translate', function($scope, $http, $translate) {
     $scope.filterOptions = {
         filterText: "",
         useExternalFilter: true
@@ -8,7 +8,7 @@ app.controller('GridDemoCtrl', ['$scope', '$http', function($scope, $http) {
         pageSizes: [250, 500, 1000],
         pageSize: 250,
         currentPage: 1
-    };  
+    };
     $scope.setPagingData = function(data, page, pageSize){  
         var pagedData = data.slice((page - 1) * pageSize, page * pageSize);
         $scope.myData = pagedData;
@@ -50,10 +50,6 @@ app.controller('GridDemoCtrl', ['$scope', '$http', function($scope, $http) {
     }, true);
     $scope.$watch('selectLangKey', function (newVal, oldVal) {
         if (newVal !== oldVal) {
-          $scope.gridOptions.columnDefs = [
-            {field: 'name', displayName: 'app.func01.NAME', headerCellFilter: 'translate' },
-            {field: 'allowance', displayName: 'app.func01.ALLOWANCE', headerCellFilter: 'translate'}
-          ];
           $scope.gridOptions.i18n = newVal;
         }
     }, true);
@@ -66,10 +62,6 @@ app.controller('GridDemoCtrl', ['$scope', '$http', function($scope, $http) {
         totalServerItems: 'totalServerItems',
         pagingOptions: $scope.pagingOptions,
         filterOptions: $scope.filterOptions,
-        columnDefs: [
-            {field: 'name', displayName: 'app.func01.NAME', headerCellFilter: 'translate' },
-            {field: 'allowance', displayName: 'app.func01.ALLOWANCE', headerCellFilter: 'translate'}
-        ],
         i18n: $scope.selectLangKey
     };
 }]);

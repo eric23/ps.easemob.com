@@ -21,9 +21,9 @@ angular.module('app')
 
           // Page routes
           $stateProvider
-              .state('app.function01', {
-                  url: '/function01',
-                  templateUrl: 'tpl/app_function01.html'
+              .state('app.price', {
+                  url: '/price',
+                  templateUrl: 'tpl/app_price.html'
               })
               .state('app', {
                   abstract: true,
@@ -175,7 +175,7 @@ angular.module('app')
                   resolve: {
                       deps: ['$ocLazyLoad',
                         function( $ocLazyLoad ){
-                          return $ocLazyLoad.load('ui.grid').then(
+                          return $ocLazyLoad.load('ngGrid').then(
                               function(){
                                   return $ocLazyLoad.load('js/controllers/grid.js');
                               }

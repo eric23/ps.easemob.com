@@ -1,32 +1,70 @@
-<div class="bg-light lter b-b wrapper-md">
-  <h1 class="m-n font-thin h3" translate="app.func01.FUNCNAME"></h1>
-</div>
-<div class="wrapper-md">
-  <div class="panel panel-default">
-    <div class="panel-heading" translate="app.func01.GRIDNAME"></div>
+<div class="panel panel-default" ng-controller="Function01Controller">
+    <div class="panel-heading" translate="app.common.GRID"></div>
+    <div class="row wrapper">
+      <div class="col-sm-5 m-b-xs">
+        <select class="input-sm form-control w-sm inline v-middle">
+          <option value="0" translate="app.common.OPERATIONS"></option>
+          <option value="1" translate="app.common.OPERATIONS_DEL"></option>
+          <option value="2" translate="app.common.OPERATIONS_EDIT"></option>
+          <option value="3" translate="app.common.OPERATIONS_EXP"></option>
+        </select>
+        <button class="btn btn-sm btn-default" translate="app.common.OPERATIONS_APPLY"></button>                
+      </div>
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-3">
+        <div class="input-group">
+          <input type="text" class="input-sm form-control" placeholder="{{'app.common.OPERATIONS_SEARCH' | translate}}">
+          <span class="input-group-btn">
+            <button class="btn btn-sm btn-default" type="button" translate="app.common.OPERATIONS_SEARCH"></button>
+          </span>
+        </div>
+      </div>
+    </div>
     <div class="table-responsive">
-      <table ui-jq="dataTable" ui-options="{
-          sAjaxSource: 'vendor/jquery/datatables/datatable.json',
-          aoColumns: [
-            { mData: 'engine' },
-            { mData: 'browser' },
-            { mData: 'platform' },
-            { mData: 'version' },
-            { mData: 'grade' }
-          ]
-        }" class="table table-striped m-b-none">
+      <table class="table table-striped b-t b-light">
         <thead>
           <tr>
-            <th  style="width:20%" translate="app.func01.NAME"></th>
-            <th  style="width:25%" translate="app.func01.NAME"></th>
-            <th  style="width:25%" translate="app.func01.NAME"></th>
-            <th  style="width:15%" translate="app.func01.NAME"></th>
-            <th  style="width:15%" translate="app.func01.NAME"></th>
+            <th style="width:20px;">
+              <label class="i-checks m-b-none">
+                <input type="checkbox"><i></i>
+              </label>
+            </th>
+            <th translate="app.func01.data.COL_PROJECT"></th>
+            <th translate="app.func01.data.COL_TASK"></th>
+            <th translate="app.func01.data.COL_DATE"></th>
+            <th style="width:30px;"></th>
           </tr>
         </thead>
         <tbody>
+          <tr ng-repeat="row in data">
+            <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+            <td>{{row.uuid}}</td>
+            <td>{{row.username}}</td>
+            <td>{{row.created}}</td>
+            <td>
+              <a href class="active" ui-toggle-class><i class="fa fa-check text-success text-active"></i><i class="fa fa-times text-danger text"></i></a>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
+    <footer class="panel-footer">
+      <div class="row">
+        <div class="col-sm-4 hidden-xs">
+          <select class="input-sm form-control w-sm inline v-middle" ng-model="pagingOptions.pageSize" ng-options="size for size in pagingOptions.pageSizes">
+          </select>
+        </div>
+        <div class="col-sm-4 text-center">
+          <small class="text-muted inline m-t-sm m-b-sm">{{pagenationText}}</small>
+        </div>
+        <div class="col-sm-4 text-right text-center-xs">                
+          <ul class="pagination pagination-sm m-t-none m-b-none">
+            <li ng-if="hasPre"><a href ng-click="movePre()"><i class="fa fa-chevron-left"></i></a></li>
+            <li><a href>{{pagingOptions.currentPage}}</a></li>
+            <li ng-if="hasNext"><a href ng-click="moveNext()"><i class="fa fa-chevron-right"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
   </div>
-</div>
