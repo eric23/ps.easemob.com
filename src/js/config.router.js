@@ -17,18 +17,39 @@ angular.module('app')
       function ($stateProvider,   $urlRouterProvider) {
           // Default page
           $urlRouterProvider
-              .otherwise('/app/dashboard-v2');
+              .otherwise('app/ps/price');
 
           // Page routes
           $stateProvider
-              .state('app.price', {
-                  url: '/price',
-                  templateUrl: 'tpl/app_price.html'
-              })
               .state('app', {
                   abstract: true,
                   url: '/app',
                   templateUrl: 'tpl/app.html'
+              })
+              // ps
+              .state('app.ps', {
+                  url: '/ps',
+                  template: '<div ui-view class="fade-in"></div>',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad){
+                          return $ocLazyLoad.load('toaster');
+                      }]
+                  }
+              })
+              .state('app.ps.price', {
+                  url: '/price',
+                  templateUrl: 'tpl/ps/ps_price.html'
+              })
+              .state('app.ps.logstore', {
+                  url: '/logstore',
+                  templateUrl: 'tpl/ps/ps_logstore.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad){
+                          return $ocLazyLoad.load('js/controllers/ps/logstore.js');
+                      }]
+                  }
               })
               .state('app.dashboard-v1', {
                   url: '/dashboard-v1',

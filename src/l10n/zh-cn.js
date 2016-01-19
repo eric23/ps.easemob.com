@@ -15,8 +15,22 @@
   "aside": {
     "nav": {
       "ps": {
-        "HEADER": "导航",
-        "PRICE": "价格目录"
+        "OVERVIEW": "概览",
+        "PRICE": "价格目录",
+
+        "SERVICE": "增值服务",
+        "LOG_STORE": "聊天记录存储时间",
+        "API_CALL": "REST API调用次数",
+        "CALLBACK": "消息回调",
+        "VIP_CLUSTER": "VIP集群",
+        "MSG_SEND": "消息发送",
+        "OFFLINE_MSG": "离线消息存储",
+        "LOG_DOWNLOAD": "聊天记录下载",
+        "BROADCAST": "实时广播消息",
+        "GROUP_MSG": "群组消息",
+        "SENSITIVE": "敏感词检测",
+        "ANTI_SPAM": "反垃圾服务",
+        "PROXY": "海外代理"
       },
       "HEADER": "导航",
       "DASHBOARD": "仪表盘",
@@ -79,15 +93,21 @@
       "OPERATIONS_EDIT": "编辑",
       "OPERATIONS_EXP": "导出",
       "OPERATIONS_APPLY": "应用",
-      "OPERATIONS_SEARCH": "查询"
+      "OPERATIONS_SEARCH": "查询",
+      "STEPS_1": "步骤 1",
+      "STEPS_2": "步骤 2",
+      "STEPS_3": "步骤 3",
+      "NEXT": "下一步",
+      "PREVIOUS": "上一步",
+      "DONE": "完成"
     },
-
-    "func01": {
-      "data": {
-        "COL_PROJECT": "项目",
-        "COL_TASK": "任务",
-        "COL_DATE": "日期"
-      }
+    "logstore": {
+      "STEP1_HEADER": "查询用户",
+      "STEP1_DESC": "请先查找想要操作的用户",
+      "STEP2_HEADER": "设置参数",
+      "STEP2_DESC": "这里您可以设置消息存储的天数",
+      "STEP3_HEADER": "确认",
+      "STEP3_DESC": "确认无误后开通该服务"
     }
   }
 }

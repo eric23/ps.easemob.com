@@ -1,0 +1,59 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3" translate="aside.nav.ps.LOG_STORE"></h1>
+</div>
+<div class="wrapper-md" ng-controller="LogStoreController">
+  <!-- toaster directive -->
+  <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'showCloseButton': false, 'time-out': 2500}"></toaster-container>
+
+  <tabset class="tab-container" ng-init="steps={percent:0, step1:true, step2:false, step3:false}">
+    <!-- Step 1 Start -->
+    <tab heading="{{'app.common.STEPS_1' | translate}}" active="steps.step1" select="steps.percent=0">
+      <h4 translate="app.logstore.STEP1_HEADER"></h4>
+      <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
+      <p class="m-b" translate="app.logstore.STEP1_DESC"></p>
+      <form name="step1" class="form-validation">
+        <p>Your email:</p>
+        <input type="email" name="email" class="form-control" ng-model="data.email" required ng-change="step1.email.$valid ? (steps.percent=17) : (steps.percent=0)">
+        <p class="m-t">Your website:</p>
+        <input type="url" name="url" placeholder="http://" class="form-control" ng-model="data.url" required ng-change="step1.url.$valid ? (steps.percent=33) : (steps.percent=17)">
+        <div class="m-t m-b">
+          <button type="submit" ng-disabled="step1.$invalid" class="btn btn-default btn-rounded" ng-click="steps.step2=true" translate="app.common.NEXT"></button>
+        </div>
+      </form>
+    </tab>
+    <!-- Step 1 End -->
+
+    <!-- Step 2 Start -->
+    <tab heading="{{'app.common.STEPS_2' | translate}}" disabled="step1.$invalid" active="steps.step2" select="steps.percent=33">
+      <h4 translate="app.logstore.STEP2_HEADER"></h4>
+      <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
+      <p class="m-b" translate="app.logstore.STEP2_DESC"></p>
+      <form name="step2" class="form-validation">
+        <p>Your age:</p>
+        <input type="number" name="age" class="form-control" ng-model="data.age" required ng-change="step2.age.$valid ? (steps.percent=66) : (steps.percent=33)">
+        <div class="m-t m-b">
+          <button type="button" class="btn btn-default btn-rounded" ng-click="steps.step1=true" translate="app.common.PREVIOUS"></button>
+          <button type="submit" ng-disabled="step2.$invalid" class="btn btn-default btn-rounded" ng-click="steps.step3=true" translate="app.common.NEXT"></button>
+        </div>
+      </form>
+    </tab>
+    <!-- Step 2 End -->
+
+    <!-- Step 3 Start -->
+    <tab heading="{{'app.common.STEPS_3' | translate}}" disabled="step2.$invalid" active="steps.step3" select="steps.percent=66">
+      <h4 translate="app.logstore.STEP3_HEADER"></h4>
+      <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
+      <p class="m-b" translate="app.logstore.STEP3_DESC"></p>
+
+      <p>Your email: {{data.email}}</p>
+      <p>Your url: {{data.url}}</p>
+      <p>Your age: {{data.age}}</p>
+
+      <div class="m-t m-b">
+        <button type="button" class="btn btn-default btn-rounded" ng-click="steps.step2=true" translate="app.common.PREVIOUS"></button>
+        <button type="button" class="btn btn-default btn-rounded" ng-click="done()" translate="app.common.DONE"></button>
+      </div>
+    </tab>
+    <!-- Step 3 End -->
+  </tabset>
+</div>
