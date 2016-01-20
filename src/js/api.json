@@ -1,0 +1,72 @@
+{
+  "servers": [
+    {
+      "name": "https://a1.sdb.easemob.com"
+    }
+  ],
+  "services": [
+    {
+      "group": "callback",
+      "apis": [
+        {
+          "name": "callback_get",
+          "uri": "/:org/:app/callbacks",
+          "method": "GET",
+          "auth": true
+        },
+        {
+          "name": "callback_add",
+          "uri": "/:org/:app/callbacks",
+          "method": "POST",
+          "auth": true,
+          "body": [
+            {
+              "property": "name",
+              "dtype": "str",
+              "required": true
+            },
+            {
+              "property": "msgTypes",
+              "dtype": "enum",
+              "options": [
+                "chat",
+                "chat_offline"
+              ],
+              "required": true
+            },
+            {
+              "property": "hxSecret",
+              "dtype": "str",
+              "required": false
+            },
+            {
+              "property": "secret",
+              "dtype": "str",
+              "required": false
+            },
+            {
+              "property": "targetUrl",
+              "dtype": "str",
+              "required": false
+            },
+            {
+              "property": "status",
+              "dtype": "enum",
+              "options": [
+                0,
+                1,
+                2
+              ],
+              "required": false
+            },
+            {
+              "property": "notifyUrl",
+              "dtype": "str",
+              "required": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -33,7 +33,7 @@ angular.module('app')
                   resolve: {
                       deps: ['$ocLazyLoad',
                         function( $ocLazyLoad){
-                          return $ocLazyLoad.load('toaster');
+                          return $ocLazyLoad.load(['toaster']);
                       }]
                   }
               })
@@ -48,6 +48,16 @@ angular.module('app')
                       deps: ['$ocLazyLoad',
                         function( $ocLazyLoad){
                           return $ocLazyLoad.load('js/controllers/ps/logstore.js');
+                      }]
+                  }
+              })
+              .state('app.ps.callback', {
+                  url: '/callback',
+                  templateUrl: 'tpl/ps/ps_callback.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad){
+                          return $ocLazyLoad.load('js/directives/ps-api.js');
                       }]
                   }
               })
