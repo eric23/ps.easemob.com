@@ -7,8 +7,9 @@ angular.module('app')
 				scope: true,
 				controller: ['$scope', '$element', '$attrs', '$http', '$state', 'toaster', function ($scope, $element, $attrs, $http, $state, toaster) {
 					var mergedConfig = angular.extend({}, $scope.$eval($attrs.apiOptions)); // attr of attrs will be formatted like api-options -> apiOptions
+					
 					$scope.config = {
-						token: 'YWMtQhKNgL9MEeW7B61GSMfXbQAAAVOTDK5Y_6gFvUyg70E8FCEDvVRqsML-M6c',
+						token: '',
 	                    apiGroup: mergedConfig['group'],
 	                    apiName: mergedConfig['name'],
 	                    server: '',
@@ -20,9 +21,18 @@ angular.module('app')
 	                    bodyProperties: []
 	                };
 
+	                $scope.render = function(){
+	                	renderPageViaApiDef($scope.config.apiGroup, $scope.config.apiName);
+	                }();
+
+	                $scope.done = function() {
+	                	invokeApi($scope.config, $scope.api);
+	                };
+
 	                function renderPageViaApiDef(group, name) {
 	                	$http.get('js/api.json').success(function (data) {
                     		$scope.config.servers = data.servers;
+                    		$scope.config.token = data.token;
 
                     		for( var i=0; i<data.services.length; i++ ) {
                     			if(data.services[i].group === group) {
@@ -37,8 +47,6 @@ angular.module('app')
                     		}
 
                     		if( $scope.config.api ) {
-                    			console.log($scope.config.api);
-
                     			var t1 = renderUIElements($scope.config.api);
                     			var template1 = $compile(t1)($scope);
                         		$element.find('#api_properties').append(template1);
@@ -48,7 +56,7 @@ angular.module('app')
                         		$element.find('#api_properties_output').append(template2);
                     		}
                     		else {
-                    			throw new Error(name + ' of ' + group + ' could not be found.');
+                    			throw new Error('API [' + name + '] of [' + group + '] could not be found.');
                     		}
                 		});
 	                }
@@ -78,7 +86,7 @@ angular.module('app')
 	                			continue;
 	                		}
 	                		if(paths[i].indexOf(':') === 0) {
-	                			html += renderStrElement(paths[i].substring(1, paths[i].length), true, 'uri');
+	                			html += renderInputElement(paths[i].substring(1, paths[i].length), 'text', true, 'uri');
 	                		}
 	                	}
 
@@ -93,14 +101,20 @@ angular.module('app')
 		                		var element = body[i];
 
 		                		switch (element.dtype) {
-		                			case 'str':
-		                				html += renderStrElement(element.property, element.required, 'body');
+		                			case 'text':
+		                				html += renderInputElement(element.property, 'text', element.required, 'body', element.tip, element.help);
 		                				break;
 		                			case 'enum':
-		                				html += renderEnumElement(element.property, element.options, element.required, 'body');
+		                				html += renderEnumElement(element.property, element.options, element.required, 'body', element.tip, element.help);
+		                				break;
+		                			case 'number':
+		                				html += renderInputElement(element.property, 'number', element.required, 'body', element.tip, element.help);
+		                				break;
+		                			case 'url':
+		                				html += renderInputElement(element.property, 'url', element.required, 'body', element.tip ? element.tip : 'http://', element.help);
 		                				break;
 		                			default:
-		                				throw new Error('Unexpected data type of ' + dtype);
+		                				throw new Error('Unexpected data type of ' + element.dtype);
 		                		}
 		                	}
 	                	}
@@ -112,13 +126,16 @@ angular.module('app')
 	                	return '';
 	                }
 
-	                function renderStrElement(name, required, part) {
+	                function renderInputElement(name, dtype, required, part, tip, help) {
 	                	if(!name || name === '') {
 	                		throw new Error('Name of a property could not be null or empty.');
 	                	}
 
 	                	required = required || true;
 	                	var requiredStr = required ? 'required' : '';
+	                	tip = tip ? tip : '';
+	                	dtype = dtype && ['text', 'email','password','url','number'].indexOf(dtype) > -1 ? dtype : 'text';
+	                	var helpStr = help ? '<span class="help-block m-b-none">' + help + '</span>' : '';
 
 	                	if( 'uri' === part ) {
 	                		$scope.config.uriProperties.push(name);
@@ -128,12 +145,18 @@ angular.module('app')
 	                		throw new Error('Unexpected part type of ' + part);
 	                	}
 	                	
-	                	// TODO - binding invalid
-	                	var template = '<p>' + name + ':</p><input name="' + name + '" class="form-control" ng-model="api.' + part + '.' + name + '" ' + requiredStr + '>';
+	                	var template = '<div class="form-group">' +
+                  					   '<label class="col-sm-2 control-label" translate="api.'+ $scope.config.apiName +'.' + name + '">' + name + '</label>' +
+                  					   '<div class="col-sm-8">' +
+                    				   '<input type="'+ dtype +'" name="' + name + '" placeholder="' + tip + '" class="form-control" ng-model="config.' + part + '.' + name + '" ' + requiredStr + '>' +
+                  					   helpStr +
+                  					   '</div>' +
+                  					   '</div>' +
+                					   '<div class="line line-dashed b-b line-lg pull-in"></div>';
 	                	return template;
 	                }
 
-	                function renderEnumElement(name, options, required, part) {
+	                function renderEnumElement(name, options, required, part, tip, help) {
 	                	if(!name || name === '') {
 	                		throw new Error('Name of a property could not be null or empty.');
 	                	}
@@ -144,6 +167,8 @@ angular.module('app')
 
 	                	required = required || true;
 	                	var requiredStr = required ? 'required' : '';
+	                	tip = tip ? tip : '';
+	                	var helpStr = help ? '<span class="help-block m-b-none">' + help + '</span>' : '';
 
 	                	if( 'uri' === part ) {
 	                		$scope.config.uriProperties.push(name);
@@ -153,11 +178,15 @@ angular.module('app')
 	                		throw new Error('Unexpected part type of ' + part);
 	                	}
 
-	                	var template = '<p>' + name + ':</p><select name="' + name + '" class="form-control m-b" ng-model="api.' + part + '.' + name + '" ' + requiredStr + '>';
+	                	var template = '<div class="form-group">' +
+                  					   '<label class="col-sm-2 control-label" translate="api.'+ $scope.config.apiName +'.' + name + '">' + name + '</label>' +
+                  					   '<div class="col-sm-8">' +
+                    				   '<select name="' + name + '" placeholder="'+tip+'" class="form-control" ng-model="config.' + part + '.' + name +'" ' + requiredStr + '>';
+                    				   
 	                	for(var i=0; i<options.length; i++) {
 	                		template += '<option>' + options[i] + '</option>';
 	                	}
-	                	template += '</select>';
+	                	template += '</select>' + helpStr + '</div></div><div class="line line-dashed b-b line-lg pull-in"></div>';
 
 	                	return template;
 	                }
@@ -166,24 +195,24 @@ angular.module('app')
 	                	p1 = p1 || [];
 	                	p2 = p2 || [];
 
+	                	var template = function(name, part){
+	                		return  '<div class="form-group">' +
+                  					'<label class="col-sm-2 control-label" translate="api.' + $scope.config.apiName + '.' + name + '"></label>' +
+                  					'<div class="col-sm-8">' +
+                    				'{{config.'+ part +'.' + name + '}}' +
+                  					'</div></div><div class="line line-dashed b-b line-lg pull-in"></div>';
+	                	};
+
 	                	var html = '';
 	                	for(var i=0; i<p1.length; i++) {
-	                		html += '<p>' + p1[i] + ': {{api.uri' + p1[i] + '}}</p>';
+	                		html += template(p1[i], 'uri');
 	                	}
 	                	for(var i=0; i<p2.length; i++) {
-	                		html += '<p>' + p2[i] + ': {{api.body' + p2[i] + '}}</p>';
+	                		html += template(p2[i], 'body');
 	                	}
 
 	                	return html;
 	                }
-
-	                $scope.render = function(){
-	                	renderPageViaApiDef($scope.config.apiGroup, $scope.config.apiName);
-	                }();
-
-	                $scope.done = function() {
-	                	invokeApi($scope.config, $scope.api);
-	                };
 
 	                function invokeApi(config, api) {
 	                	var server = config.server;
@@ -200,6 +229,20 @@ angular.module('app')
 	                	// prepare query
 
 	                	// send request
+	                	$http({
+	                		method: config.api.method,
+	                		url: server + uri,
+	                		body: body,
+	                		headers: header
+	                	})
+	                	.success(function(data, status){
+	                		console.log(data);
+	                		success();
+	                	})
+	                	.error(function(data, status){
+	                		console.log(data);
+	                		error(status);
+	                	});
 	                }
 
 	                function prepareUri(uri, properties) {

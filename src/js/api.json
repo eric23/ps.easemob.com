@@ -1,7 +1,11 @@
 {
+  "token": "",
   "servers": [
     {
       "name": "https://a1.sdb.easemob.com"
+    },
+    {
+      "name": "https://a1.easemob.com"
     }
   ],
   "services": [
@@ -22,8 +26,9 @@
           "body": [
             {
               "property": "name",
-              "dtype": "str",
-              "required": true
+              "dtype": "text",
+              "required": true,
+              "tip": "不可重复，建议用有含义的字符串命名"
             },
             {
               "property": "msgTypes",
@@ -36,17 +41,17 @@
             },
             {
               "property": "hxSecret",
-              "dtype": "str",
+              "dtype": "text",
               "required": false
             },
             {
               "property": "secret",
-              "dtype": "str",
+              "dtype": "text",
               "required": false
             },
             {
               "property": "targetUrl",
-              "dtype": "str",
+              "dtype": "url",
               "required": false
             },
             {
@@ -57,11 +62,12 @@
                 1,
                 2
               ],
-              "required": false
+              "required": false,
+              "help": "开通请选 1"
             },
             {
               "property": "notifyUrl",
-              "dtype": "str",
+              "dtype": "url",
               "required": false
             }
           ]

@@ -6,18 +6,32 @@
     <!-- Step 1 Start -->
     <tab heading="{{'app.common.STEPS_1' | translate}}" active="steps.step1" select="steps.percent=0">
       <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
-      <form name="step1" class="form-validation">
-        <div id="api_properties">
-          <p>Server:</p>
-          <select name="server" class="form-control m-b" ng-repeat="server in config.servers" ng-model="config.server" required>
-            <option>{{server.name}}</option>
-          </select>
-        </div>
 
-        <div class="m-t m-b">
-          <button type="submit" ng-disabled="step1.$invalid" class="btn btn-default btn-rounded" ng-click="steps.step2=true" translate="app.common.NEXT"></button>
+      <div class="row">
+        <div class="col-sm-12">
+          <form name="step1" class="form-horizontal form-validation">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <strong translate="api.common.STEP1"></strong>
+              </div>
+              <div class="panel-body" id="api_properties">                    
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" translate="api.common.SERVER"></label>
+                  <div class="col-sm-8">
+                    <select name="server" class="form-control" ng-model="config.server" required>
+                      <option ng-repeat="server in config.servers">{{server.name}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+              </div>
+              <footer class="panel-footer text-right bg-light lter">
+                <button type="submit" ng-disabled="step1.$invalid" class="btn btn-default btn-rounded" ng-click="steps.step2=true" translate="app.common.NEXT"></button>
+              </footer>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </tab>
     <!-- Step 1 End -->
 
@@ -25,12 +39,29 @@
     <tab heading="{{'app.common.STEPS_2' | translate}}" disabled="step1.$invalid" active="steps.step2" select="steps.percent=50">
       <progressbar value="steps.percent" class="progress-xs" type="success"></progressbar>
       
-      <div id="api_properties_output">
-        <p>Server: {{config.server}}</p>
-      </div>
-      <div class="m-t m-b">
-        <button type="button" class="btn btn-default btn-rounded" ng-click="steps.step1=true" translate="app.common.PREVIOUS"></button>
-        <button type="button" class="btn btn-default btn-rounded" ng-click="done()" translate="app.common.DONE"></button>
+      <div class="row">
+        <div class="col-sm-12">
+          <form name="step2" class="form-horizontal form-validation">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <strong translate="api.common.STEP2"></strong>
+              </div>
+              <div class="panel-body" id="api_properties_output">                    
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" translate="api.common.SERVER"></label>
+                  <div class="col-sm-8">
+                    {{config.server}}
+                  </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+              </div>
+              <footer class="panel-footer text-right bg-light lter">
+                <button type="button" class="btn btn-default btn-rounded" ng-click="steps.step1=true" translate="app.common.PREVIOUS"></button>
+                <button type="button" class="btn btn-default btn-rounded" ng-click="done()" translate="app.common.DONE"></button>
+              </footer>
+            </div>
+          </form>
+        </div>
       </div>
     </tab>
     <!-- Step 2 End -->

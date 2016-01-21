@@ -109,5 +109,27 @@
       "STEP3_HEADER": "确认",
       "STEP3_DESC": "确认无误后开通该服务"
     }
+  },
+  "api": {
+    "common": {
+      "STEP1": "设置参数",
+      "STEP2": "确认执行",
+      "SERVER": "服务器地址"
+    },
+    "callback_get": {
+      "org": "组织机构标识",
+      "app": "应用标识"
+    },
+    "callback_add": {
+      "org": "组织机构标识",
+      "app": "应用标识",
+      "name": "回调名称",
+      "msgTypes": "消息类型",
+      "hxSecret": "环信秘钥",
+      "secret": "用户秘钥",
+      "targetUrl": "回调地址",
+      "status": "状态",
+      "notifyUrl": "通知地址"
+    }
   }
 }
