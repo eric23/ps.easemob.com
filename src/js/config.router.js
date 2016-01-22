@@ -33,7 +33,7 @@ angular.module('app')
                   resolve: {
                       deps: ['$ocLazyLoad',
                         function( $ocLazyLoad){
-                          return $ocLazyLoad.load(['toaster']);
+                          return $ocLazyLoad.load(['toaster', 'js/directives/ps-api.js']);
                       }]
                   }
               })
@@ -41,25 +41,13 @@ angular.module('app')
                   url: '/price',
                   templateUrl: 'tpl/ps/ps_price.html'
               })
-              .state('app.ps.logstore', {
-                  url: '/logstore',
-                  templateUrl: 'tpl/ps/ps_logstore.html',
-                  resolve: {
-                      deps: ['$ocLazyLoad',
-                        function( $ocLazyLoad){
-                          return $ocLazyLoad.load('js/controllers/ps/logstore.js');
-                      }]
-                  }
+              .state('app.ps.enableservice', {
+                  url: '/enableservice?service',
+                  templateUrl: 'tpl/ps/ps_enableservice.html'
               })
               .state('app.ps.callback', {
                   url: '/callback',
-                  templateUrl: 'tpl/ps/ps_callback.html',
-                  resolve: {
-                      deps: ['$ocLazyLoad',
-                        function( $ocLazyLoad){
-                          return $ocLazyLoad.load('js/directives/ps-api.js');
-                      }]
-                  }
+                  templateUrl: 'tpl/ps/ps_callback.html'
               })
               .state('app.dashboard-v1', {
                   url: '/dashboard-v1',

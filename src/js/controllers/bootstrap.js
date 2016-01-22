@@ -269,8 +269,8 @@
       class: 'datepicker'
     };
 
-    $scope.initDate = new Date('2016-15-20');
-    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+    $scope.initDate = new Date();
+    $scope.formats = ['yyyy-MM-dd 00:00:00', 'dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     $scope.format = $scope.formats[0];
   }])
   ; 

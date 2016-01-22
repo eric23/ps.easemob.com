@@ -17,7 +17,7 @@
       "ps": {
         "OVERVIEW": "概览",
         "PRICE": "价格目录",
-
+        "ENABLE_SERVICE": "开通服务",
         "SERVICE": "增值服务",
         "LOG_STORE": "聊天记录存储时间",
         "API_CALL": "REST API调用次数",
@@ -130,6 +130,15 @@
       "targetUrl": "回调地址",
       "status": "状态",
       "notifyUrl": "通知地址"
+    },
+    "enable_service": {
+      "appkey": "App Key",
+      "productType": "服务类型",
+      "startTime": "开始时间",
+      "dateType": "时长类型",
+      "openTime": "时长",
+      "status": "状态",
+      "operator": "操作者"
     }
   }
 }

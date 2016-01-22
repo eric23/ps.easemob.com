@@ -73,6 +73,59 @@
           ]
         }
       ]
+    }, 
+    {
+      "group": "ops",
+      "apis": [
+        {
+          "name": "enable_service",
+          "uri": "/ops/payedProduct/addPayedProduct",
+          "method": "POST",
+          "auth": true,
+          "body": [
+            {
+              "property": "appkey",
+              "dtype": "text",
+              "required": true
+            },
+            {
+              "property": "productType",
+              "dtype": "text",
+              "required": true
+            },
+            {
+              "property": "startTime",
+              "dtype": "date",
+              "required": true
+            },
+            {
+              "property": "dateType",
+              "dtype": "enum",
+              "options": [
+                "DAY",
+                "MONTH",
+                "YEAR"
+              ],
+              "required": true
+            },
+            {
+              "property": "openTime",
+              "dtype": "number",
+              "required": true
+            },
+            {
+              "property": "status",
+              "dtype": "text",
+              "required": true
+            },
+            {
+              "property": "operator",
+              "dtype": "text",
+              "required": true
+            }
+          ]
+        }
+      ]
     }
   ]
 }
