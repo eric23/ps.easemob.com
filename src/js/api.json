@@ -1,5 +1,5 @@
 {
-  "token": "",
+  "token": "faketoken",
   "servers": [
     {
       "name": "https://a1.sdb.easemob.com"

@@ -24,6 +24,7 @@ module.exports = {
             // libs
             {src: "bower_components/moment/min/moment.min.js", dest: "src/vendor/libs/moment.min.js"},
             {src: "bower_components/screenfull/dist/screenfull.min.js", dest: "src/vendor/libs/screenfull.min.js"},
+            {src: "bower_components/isjs/is.min.js", dest: "src/vendor/libs/is.min.js"},
 
             // core
             {src: "bower_components/angular-ui-router/release/angular-ui-router.js", dest: "src/vendor/angular/angular-ui-router/angular-ui-router.js"},
