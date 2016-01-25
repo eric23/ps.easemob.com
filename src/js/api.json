@@ -71,6 +71,60 @@
               "required": false
             }
           ]
+        },
+        {
+          "name": "callback_set",
+          "uri": "/:org/:app/callbacks/:name",
+          "method": "PUT",
+          "auth": true,
+          "body": [
+            {
+              "property": "msgTypes",
+              "dtype": "enum",
+              "options": [
+                "chat",
+                "chat_offline"
+              ],
+              "required": true
+            },
+            {
+              "property": "hxSecret",
+              "dtype": "text",
+              "required": false
+            },
+            {
+              "property": "secret",
+              "dtype": "text",
+              "required": false
+            },
+            {
+              "property": "targetUrl",
+              "dtype": "url",
+              "required": false
+            },
+            {
+              "property": "status",
+              "dtype": "enum",
+              "options": [
+                0,
+                1,
+                2
+              ],
+              "required": false,
+              "help": "开通请选 1"
+            },
+            {
+              "property": "notifyUrl",
+              "dtype": "url",
+              "required": false
+            }
+          ]
+        },
+        {
+          "name": "callback_del",
+          "uri": "/:org/:app/callbacks/:name",
+          "method": "DELETE",
+          "auth": true
         }
       ]
     }, 
@@ -124,6 +178,100 @@
               "required": true
             }
           ]
+        }
+      ]
+    },
+    {
+      "group": "logstore",
+      "apis": [
+        {
+          "name": "logstore_set",
+          "method": "PUT",
+          "uri": "/:org/:app",
+          "body": [
+            {
+              "property": "chatfile_ttl",
+              "dtype": "number",
+              "required": true,
+              "help": "30天/30 days = 2592000"
+            },
+            {
+              "property": "chatmessage_ttl",
+              "dtype": "number",
+              "required": true,
+              "help": "30天/30 days = 2592000000"
+            }
+          ],
+          "auth": true
+        }
+      ]
+    },
+    {
+      "group": "antispam",
+      "apis": [
+        {
+          "name": "sensitive_open",
+          "uri": "/antispam/keyword",
+          "method": "POST",
+          "body": [
+            {
+              "property": "appKey",
+              "dtype": "text",
+              "required": true,
+              "tip": "org#app"
+            }
+          ],
+          "auth": false
+        },
+        {
+          "name": "sensitive_upload",
+          "uri": "/antispam/keyword/words",
+          "method": "POST",
+          "body": [
+            {
+              "property": "appKey",
+              "dtype": "text",
+              "required": true,
+              "tip": "org#app"
+            },
+            {
+              "property": "wordList",
+              "dtype": "large-text",
+              "required": true,
+              "tip": "word1,word2,word3...",
+              "help": "敏感词请用英文逗号分隔!"
+            }
+          ],
+          "auth": false
+        },
+        {
+          "name": "sensitive_download",
+          "uri": "/antispam/keyword/words/:org/:app",
+          "method": "GET",
+          "auth": false
+        },
+        {
+          "name": "sensitive_parse",
+          "uri": "/antispam/keyword/parser",
+          "method": "POST",
+          "body": [
+            {
+              "property": "org",
+              "dtype": "text",
+              "required": true
+            },
+            {
+              "property": "app",
+              "dtype": "text",
+              "required": true
+            },
+            {
+              "property": "content",
+              "dtype": "text",
+              "required": true
+            }
+          ],
+          "auth": false
         }
       ]
     }

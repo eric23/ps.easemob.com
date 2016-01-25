@@ -68,7 +68,7 @@ angular.module('app')
       };
 
       // api
-      apiService.init();
+      // apiService.init();
 
       function isSmartDevice( $window )
       {

@@ -37,18 +37,65 @@ angular.module('app')
                       }]
                   }
               })
+              // price
               .state('app.ps.price', {
                   url: '/price',
                   templateUrl: 'tpl/ps/ps_price.html'
               })
+              // enable service
               .state('app.ps.enableservice', {
                   url: '/enableservice?service',
                   templateUrl: 'tpl/ps/ps_enableservice.html'
               })
+              // log store
+              .state('app.ps.logstore', {
+                  url: '/logstore',
+                  templateUrl: 'tpl/ps/ps_logstore.html'
+              })
+              // callback
               .state('app.ps.callback', {
                   url: '/callback',
-                  templateUrl: 'tpl/ps/ps_callback.html'
+                  template: '<div ui-view class="fade-in-up"></div>'
               })
+              .state('app.ps.callback.add', {
+                  url: '/callback/add',
+                  templateUrl: 'tpl/ps/ps_callback_add.html'
+              })
+              .state('app.ps.callback.del', {
+                  url: '/callback/del',
+                  templateUrl: 'tpl/ps/ps_callback_del.html'
+              })
+              .state('app.ps.callback.set', {
+                  url: '/callback/set',
+                  templateUrl: 'tpl/ps/ps_callback_set.html'
+              })
+              .state('app.ps.callback.get', {
+                  url: '/callback/get',
+                  templateUrl: 'tpl/ps/ps_callback_get.html'
+              })
+              // sensitive words
+              .state('app.ps.sensitive', {
+                  url: '/sensitive',
+                  template: '<div ui-view class="fade-in-up"></div>'
+              })
+              .state('app.ps.sensitive.open', {
+                  url: '/sensitive/open',
+                  templateUrl: 'tpl/ps/ps_sensitive_open.html'
+              })
+              .state('app.ps.sensitive.upload', {
+                  url: '/sensitive/upload',
+                  templateUrl: 'tpl/ps/ps_sensitive_upload.html'
+              })
+              .state('app.ps.sensitive.download', {
+                  url: '/sensitive/download',
+                  templateUrl: 'tpl/ps/ps_sensitive_download.html'
+              })
+              .state('app.ps.sensitive.parse', {
+                  url: '/sensitive/parse',
+                  templateUrl: 'tpl/ps/ps_sensitive_parse.html'
+              })
+
+
               .state('app.dashboard-v1', {
                   url: '/dashboard-v1',
                   templateUrl: 'tpl/app_dashboard_v1.html',

@@ -34,42 +34,7 @@
           </li>
         </ul>
         <div class="panel-footer text-center">
-          <a href class="btn btn-info font-bold m">开通</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="panel b-a">
-        <div class="panel-heading text-center bg-info no-border">
-          <h4 class="text-u-c m-b-none">REST API调用次数</h4>
-          <h2 class="m-t-none">
-            <sup class="pos-rlt" style="top:-22px">RMB</sup>
-            <span class="text-2x text-lt">0</span>
-            <span class="text-xs">元/年 起</span>
-          </h2>
-        </div>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <i class="icon-check text-success m-r-xs"></i> 同一个IP每秒调用&lt;30次：免费 
-          </li>
-          <li class="list-group-item">
-            <i class="icon-check text-success m-r-xs"></i> 同一个IP每秒调用30-100次：60000元/年
-          </li>
-          <li class="list-group-item">
-            <i class="icon-check text-success m-r-xs"></i> 同一个IP每秒调用&gt;100次：96000元/年
-          </li>
-          <li class="list-group-item">
-            &nbsp;
-          </li>
-          <li class="list-group-item">
-            &nbsp;
-          </li>
-          <li class="list-group-item">
-            &nbsp;
-          </li>
-        </ul>
-        <div class="panel-footer text-center">
-          <a href class="btn btn-info font-bold m">开通</a>
+          <a href class="btn btn-info font-bold m" ui-sref="app.ps.enableservice({service:'LOGSTORE'})">开通</a>
         </div>
       </div>
     </div>
@@ -111,7 +76,7 @@
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="panel b-a">
         <div class="panel-heading text-center bg-info no-border">
-          <h4 class="text-u-c m-b-none">VIP集群</h4>
+          <h4 class="text-u-c m-b-none">敏感词检测</h4>
           <h2 class="m-t-none">
             <sup class="pos-rlt" style="top:-22px">RMB</sup>
             <span class="text-2x text-lt">60000</span>
@@ -139,11 +104,47 @@
           </li>
         </ul>
         <div class="panel-footer text-center">
-          <a href class="btn btn-info font-bold m">开通</a>
+          <a href class="btn btn-info font-bold m" ui-sref="app.ps.enableservice({service:'SENSITIVE'})">开通</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="panel b-a">
+        <div class="panel-heading text-center bg-info no-border">
+          <h4 class="text-u-c m-b-none">反垃圾服务</h4>
+          <h2 class="m-t-none">
+            <sup class="pos-rlt" style="top:-22px">RMB</sup>
+            <span class="text-2x text-lt">60000</span>
+            <span class="text-xs">元/年 起</span>
+          </h2>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <i class="icon-check text-success m-r-xs"></i> 日活&lt;30万：60000元/年 
+          </li>
+          <li class="list-group-item">
+            <i class="icon-check text-success m-r-xs"></i> 日活&gt;30万：96000元/年 
+          </li>
+          <li class="list-group-item">
+            &nbsp;
+          </li>
+          <li class="list-group-item">
+            &nbsp;
+          </li>
+          <li class="list-group-item">
+            &nbsp;
+          </li>
+          <li class="list-group-item">
+            &nbsp;
+          </li>
+        </ul>
+        <div class="panel-footer text-center">
+          <a href class="btn btn-info font-bold m" ui-sref="app.ps.enableservice({service:'ANTISPAM'})">开通</a>
         </div>
       </div>
     </div>
   </div>
+  <!--
   <div class="row row-sm">
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="panel b-a">
@@ -327,57 +328,22 @@
     <div class="col-lg-3 col-md-4 col-sm-6">
       <div class="panel b-a">
         <div class="panel-heading text-center bg-info no-border">
-          <h4 class="text-u-c m-b-none">敏感词检测</h4>
+          <h4 class="text-u-c m-b-none">REST API调用次数</h4>
           <h2 class="m-t-none">
             <sup class="pos-rlt" style="top:-22px">RMB</sup>
-            <span class="text-2x text-lt">60000</span>
+            <span class="text-2x text-lt">0</span>
             <span class="text-xs">元/年 起</span>
           </h2>
         </div>
         <ul class="list-group">
           <li class="list-group-item">
-            <i class="icon-check text-success m-r-xs"></i> 日活&lt;30万：60000元/年 
+            <i class="icon-check text-success m-r-xs"></i> 同一个IP每秒调用&lt;30次：免费 
           </li>
           <li class="list-group-item">
-            <i class="icon-check text-success m-r-xs"></i> 日活&gt;30万：96000元/年 
+            <i class="icon-check text-success m-r-xs"></i> 同一个IP每秒调用30-100次：60000元/年
           </li>
           <li class="list-group-item">
-            &nbsp;
-          </li>
-          <li class="list-group-item">
-            &nbsp;
-          </li>
-          <li class="list-group-item">
-            &nbsp;
-          </li>
-          <li class="list-group-item">
-            &nbsp;
-          </li>
-        </ul>
-        <div class="panel-footer text-center">
-          <a href class="btn btn-info font-bold m">开通</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="panel b-a">
-        <div class="panel-heading text-center bg-info no-border">
-          <h4 class="text-u-c m-b-none">反垃圾服务</h4>
-          <h2 class="m-t-none">
-            <sup class="pos-rlt" style="top:-22px">RMB</sup>
-            <span class="text-2x text-lt">60000</span>
-            <span class="text-xs">元/年 起</span>
-          </h2>
-        </div>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <i class="icon-check text-success m-r-xs"></i> 日活&lt;30万：60000元/年 
-          </li>
-          <li class="list-group-item">
-            <i class="icon-check text-success m-r-xs"></i> 日活&gt;30万：96000元/年 
-          </li>
-          <li class="list-group-item">
-            &nbsp;
+            <i class="icon-check text-success m-r-xs"></i> 同一个IP每秒调用&gt;100次：96000元/年
           </li>
           <li class="list-group-item">
             &nbsp;
@@ -429,5 +395,41 @@
         </div>
       </div>
     </div>
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="panel b-a">
+        <div class="panel-heading text-center bg-info no-border">
+          <h4 class="text-u-c m-b-none">VIP集群</h4>
+          <h2 class="m-t-none">
+            <sup class="pos-rlt" style="top:-22px">RMB</sup>
+            <span class="text-2x text-lt">60000</span>
+            <span class="text-xs">元/年 起</span>
+          </h2>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <i class="icon-check text-success m-r-xs"></i> 日活&lt;30万：60000元/年 
+          </li>
+          <li class="list-group-item">
+            <i class="icon-check text-success m-r-xs"></i> 日活&gt;30万：96000元/年 
+          </li>
+          <li class="list-group-item">
+            &nbsp;
+          </li>
+          <li class="list-group-item">
+            &nbsp;
+          </li>
+          <li class="list-group-item">
+            &nbsp;
+          </li>
+          <li class="list-group-item">
+            &nbsp;
+          </li>
+        </ul>
+        <div class="panel-footer text-center">
+          <a href class="btn btn-info font-bold m">开通</a>
+        </div>
+      </div>
+    </div>
   </div>
+  -->
 </div>

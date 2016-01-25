@@ -1,17 +1,4 @@
 {
-  "header": {
-    "navbar": {
-      "UPLOAD": "Upload",
-      "new": {
-        "NEW": "New",
-        "PROJECT": "Projects",
-        "TASK": "Task",
-        "USER": "User",
-        "EMAIL": "Email"
-      },
-      "NOTIFICATIONS": "Notifications"
-    }
-  },
   "aside": {
     "nav": {
       "ps": {
@@ -22,13 +9,21 @@
         "LOG_STORE": "聊天记录存储时间",
         "API_CALL": "REST API调用次数",
         "CALLBACK": "消息回调",
+        "CALLBACK_ADD": "新增消息回调",
+        "CALLBACK_DEL": "删除消息回调",
+        "CALLBACK_SET": "修改消息回调",
+        "CALLBACK_GET": "查询消息回调",
         "VIP_CLUSTER": "VIP集群",
         "MSG_SEND": "消息发送",
         "OFFLINE_MSG": "离线消息存储",
         "LOG_DOWNLOAD": "聊天记录下载",
         "BROADCAST": "实时广播消息",
         "GROUP_MSG": "群组消息",
-        "SENSITIVE": "敏感词检测",
+        "SENSITIVE": "敏感词过滤",
+        "SENSITIVE_OPEN": "开通敏感词过滤",
+        "SENSITIVE_UPLOAD": "上传敏感词",
+        "SENSITIVE_DOWNLOAD": "下载敏感词",
+        "SENSITIVE_PARSE": "测试敏感词",
         "ANTI_SPAM": "反垃圾服务",
         "PROXY": "海外代理"
       },
@@ -131,6 +126,22 @@
       "status": "状态",
       "notifyUrl": "通知地址"
     },
+    "callback_set": {
+      "org": "组织机构标识",
+      "app": "应用标识",
+      "name": "回调名称",
+      "msgTypes": "消息类型",
+      "hxSecret": "环信秘钥",
+      "secret": "用户秘钥",
+      "targetUrl": "回调地址",
+      "status": "状态",
+      "notifyUrl": "通知地址"
+    },
+    "callback_del": {
+      "org": "组织机构标识",
+      "app": "应用标识",
+      "name": "回调名称"
+    },
     "enable_service": {
       "appkey": "App Key",
       "productType": "服务类型",
@@ -139,6 +150,28 @@
       "openTime": "时长",
       "status": "状态",
       "operator": "操作者"
+    },
+    "logstore_set": {
+      "org": "组织机构标识",
+      "app": "应用标识",
+      "chatfile_ttl": "聊天文件过期时间(秒)",
+      "chatmessage_ttl": "聊天消息过期时间(毫秒)"
+    },
+    "sensitive_open": {
+      "appKey": "App Key"
+    },
+    "sensitive_upload": {
+      "appKey": "App Key",
+      "wordList": "敏感词"
+    },
+    "sensitive_download": {
+      "org": "组织机构标识",
+      "app": "应用标识"
+    },
+    "sensitive_parse": {
+      "org": "组织机构标识",
+      "app": "应用标识",
+      "content": "测试内容"
     }
   }
 }
