@@ -6,10 +6,6 @@ angular.module('app').directive('api', ['$compile',
             scope: true,
             controller: ['$scope', '$element', '$attrs', '$http', '$state', 'toaster', 'apiService',
                 function($scope, $element, $attrs, $http, $state, toaster, apiService) {
-                    if (!apiService.initialized()) {
-                        apiService.init();
-                    }
-
                     var mergedConfig = angular.extend({}, $scope.$eval($attrs.apiOptions)); // attr of attrs will be formatted like api-options -> apiOptions
 
                     $scope.config = {
@@ -32,11 +28,20 @@ angular.module('app').directive('api', ['$compile',
                     };
 
                     $scope.render = function() {
+                        initParameters();
+                        renderPageViaApiDef($scope.config.apiGroup, $scope.config.apiName);
+                    };
+
+                    if (!apiService.initialized()) {
+                        apiService.init();
                         setTimeout(function() {
-                            initParameters();
-                            renderPageViaApiDef($scope.config.apiGroup, $scope.config.apiName);
+                            $scope.render();
                         }, 100);
-                    }();
+                    } else {
+                        setTimeout(function() {
+                            $scope.render();
+                        }, 0);
+                    }
 
                     $scope.done = function() {
                         invokeApi($scope.config, $scope.api);
