@@ -33,7 +33,7 @@ angular.module('app')
                   resolve: {
                       deps: ['$ocLazyLoad',
                         function( $ocLazyLoad){
-                          return $ocLazyLoad.load(['toaster', 'js/directives/ps-api.js']);
+                          return $ocLazyLoad.load(['toaster']);
                       }]
                   }
               })
