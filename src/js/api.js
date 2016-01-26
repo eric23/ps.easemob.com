@@ -380,8 +380,16 @@ directive('api', ['$compile', '$state', '$http', 'toaster', 'apiService',
                 }
 
                 $scope.done = function() {
-                    //console.log(JSON.stringify($scope.config));
-                    //console.log(JSON.stringify($scope.api));
+                    var validation = $scope.validate();
+                    if (!validation.pass) {
+                        toaster.pop({
+                            type: 'error',
+                            title: '提示',
+                            body: '操作失败，错误信息：' + validation.error
+                        });
+
+                        return;
+                    }
 
                     var promise = apiService.execute($scope.config.api, $scope.api);
                     promise.then(function(obj) {
@@ -393,6 +401,73 @@ directive('api', ['$compile', '$state', '$http', 'toaster', 'apiService',
 
                 $scope.exit = function() {
                     $state.reload();
+                };
+
+                $scope.validate = function() {
+                    var validation = {
+                        pass: false
+                    };
+                    var error = '';
+
+                    // check uri
+                    for (var i = 0; i < $scope.config.uriProperties.length; i++) {
+                        var uriP = $scope.config.uriProperties[i];
+                        if (is.not.string($scope.api.uri[uriP]) || is.empty($scope.api.uri[uriP])) {
+                            error += uriP + ' is empty. ';
+                        }
+                    }
+
+                    // check body
+                    if (is.existy($scope.config.api.body)) {
+                        for (var i = 0; i < $scope.config.api.body.length; i++) {
+                            var bodyP = $scope.config.api.body[i];
+                            var dtype = bodyP.dtype;
+                            var bodyV = $scope.api.body[bodyP.property];
+
+                            if (bodyP.required && (is.not.existy(bodyV) || is.empty(bodyV))) {
+                                error += bodyP.property + ' is empty. ';
+                            }
+
+                            switch (dtype) {
+                                case 'text':
+                                    if (is.existy(bodyV) && is.not.string(bodyV)) {
+                                        error += bodyP.property + ' is not a text. ';
+                                    }
+                                    break;
+                                case 'enum':
+                                    break;
+                                case 'number':
+                                    if (is.existy(bodyV) && is.not.number(bodyV)) {
+                                        error += bodyP.property + ' is not a number. ';
+                                    }
+                                    break;
+                                case 'url':
+                                    if (is.existy(bodyV) && is.not.url(bodyV)) {
+                                        error += bodyP.property + ' is not a url. ';
+                                    }
+                                    break;
+                                case 'date':
+                                    if (is.existy(bodyV) && is.not.string(bodyV)) {
+                                        error += bodyP.property + ' is not a date. ';
+                                    }
+                                    break;
+                                case 'large-text':
+                                    if (is.existy(bodyV) && is.not.string(bodyV)) {
+                                        error += bodyP.property + ' is not a text. ';
+                                    }
+                                    break;
+                                default:
+                                    throw new Error('Unexpected data type of ' + dtype);
+                            }
+                        }
+                    }
+
+                    // check parameters
+                    // TODO
+
+                    validation.error = error;
+                    validation.pass = is.empty(error);
+                    return validation;
                 };
 
                 function initParameters() {
