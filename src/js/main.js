@@ -79,8 +79,11 @@ angular.module('app')
                     if (whiteList.indexOf(toState.name) < 0 && !aclService.logined()) {
                         event.preventDefault();
                         aclService.logout();
+                    } else {
+                        $scope.currentUser = aclService.currentUser;
                     }
                 });
+            
 
             function isSmartDevice($window) {
                 // Adapted from http://www.detectmobilebrowsers.com
