@@ -17,10 +17,15 @@ angular.module('app')
       function ($stateProvider,   $urlRouterProvider) {
           // Default page
           $urlRouterProvider
-              .otherwise('app/ps/price');
+              .otherwise('login');
 
           // Page routes
           $stateProvider
+              // login
+              .state('login', {
+                  url: '/login',
+                  templateUrl: 'tpl/ps/login.html'
+              })
               .state('app', {
                   abstract: true,
                   url: '/app',
