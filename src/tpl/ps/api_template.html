@@ -18,7 +18,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label" translate="api.common.SERVER"></label>
                   <div class="col-sm-8">
-                    <select name="server" class="form-control" ng-model="config.server" required>
+                    <select name="server" class="form-control" ng-model="api.server" required>
                       <option ng-repeat="server in config.servers">{{server}}</option>
                     </select>
                   </div>
@@ -50,7 +50,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label" translate="api.common.SERVER"></label>
                   <div class="col-sm-8">
-                    {{config.server}}
+                    {{api.server}}
                   </div>
                 </div>
                 <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -65,5 +65,34 @@
       </div>
     </tab>
     <!-- Step 2 End -->
+
+    <!-- Step 3 Start -->
+    <tab heading="{{'app.common.STEPS_3' | translate}}" disabled="step1.$invalid" active="steps.step3">
+      <div class="row">
+        <div class="col-sm-12">
+          <form name="step2" class="form-horizontal form-validation">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <strong translate="api.common.STEP3"></strong>
+              </div>
+              <div class="panel-body" id="api_request_output">                    
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" translate="api.common.RESPONSE"></label>
+                  <div class="col-sm-8">
+                    <pre>{{response}}</pre>
+                  </div>
+                </div>
+                <div class="line line-dashed b-b line-lg pull-in"></div>
+              </div>
+              <footer class="panel-footer text-right bg-light lter">
+                <button type="button" class="btn btn-default btn-rounded" ng-click="steps.step2=true" translate="app.common.PREVIOUS"></button>
+                <button type="button" class="btn btn-default btn-rounded" ng-click="exit()" translate="app.common.EXIT"></button>
+              </footer>
+            </div>
+          </form>
+        </div>
+      </div>
+    </tab>
+    <!-- Step 3 End -->
   </tabset>
 </div>

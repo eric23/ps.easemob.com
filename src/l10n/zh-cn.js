@@ -94,7 +94,8 @@
       "STEPS_3": "步骤 3",
       "NEXT": "下一步",
       "PREVIOUS": "上一步",
-      "DONE": "完成"
+      "DONE": "完成",
+      "EXIT": "退出"
     },
     "logstore": {
       "STEP1_HEADER": "查询用户",
@@ -109,6 +110,8 @@
     "common": {
       "STEP1": "设置参数",
       "STEP2": "确认执行",
+      "STEP3": "查看结果",
+      "RESPONSE": "请求响应",
       "SERVER": "服务器地址"
     },
     "callback_get": {

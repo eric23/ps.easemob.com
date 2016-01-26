@@ -139,16 +139,18 @@ service('apiService', ['$http',
             }
 
             if (isValidApi(apiDef)) {
-                var target = findTarget(apiData);
-                var reqMethod = findMethod(apiData);
-                var reqHeader = findHeader(apiData);
-                var reqParameter = findParameter(apiData);
-                var reqBody = findBody(apiData);
+                var target = findTarget(apiDef, apiData);
+                var reqMethod = findMethod(apiDef, apiData);
+                var reqHeader = findHeader(apiDef, apiData);
+                var reqParameter = findParameter(apiDef, apiData);
+                var reqBody = findBody(apiDef, apiData);
+
+                console.log('Request: [target=' + target + '] [method=' + reqMethod + '] [header=' + JSON.stringify(reqHeader) + '] [parameter=' + JSON.stringify(reqParameter) + '] [body=' + JSON.stringify(reqBody) + ']');
 
                 var httpPromise = $http({
                     url: target,
                     method: reqMethod,
-                    body: reqBody,
+                    data: reqBody,
                     headers: reqHeader,
                     params: reqParameter
                 });
@@ -226,33 +228,58 @@ service('apiService', ['$http',
             return result;
         }
 
-        function findTarget(data) {
+        function findTarget(def, data) {
             var server, uri;
 
-            if (is.existy(data.server) && is.existy(data.uri)) {
+            if (is.existy(data.server) && is.not.empty(data.server)) {
                 server = data.server;
-                uri = data.uri;
             } else {
-                throw new Error('Service target could not be found in your data, it must contain the elements named [server] and [uri].');
+                throw new Error('Service server could not be found in your data, it must contain the element named [server].');
             }
 
+            if (is.existy(def.uri) && is.not.empty(def.uri)) {
+                uri = def.uri;
+            } else {
+                throw new Error('Service uri could not be found in your config, it must contain the element named [uri].');
+            }
+
+            if (uri.indexOf(':') > -1) {
+                if (is.not.existy(data.uri) || is.empty(data.uri)) {
+                    throw new Error('Service uri could not be found in your data, it must contain the element named [uri].');
+                }
+
+                // transfer the uri
+                var paths = uri.split('/');
+
+                for (var i = 0; i < paths.length; i++) {
+                    if (paths[i] === '') {
+                        continue;
+                    }
+                    if (paths[i].indexOf(':') === 0) {
+                        var path = paths[i].substring(1, paths[i].length);
+                        uri = uri.replace(':' + path, data.uri[path]);
+                    }
+                }
+            }
 
             return server + uri;
         }
 
-        function findMethod(data) {
+        function findMethod(def, data) {
             var method;
 
-            if (is.existy(data.method)) {
+            if (is.existy(def.method)) {
+                method = def.method;
+            } else if (is.existy(data.method)) {
                 method = data.method;
             } else {
-                throw new Error('Request method could not be found in your data, it must contain the element named [method].');
+                throw new Error('Request method could not be found in your config or data, it must contain the element named [method].');
             }
 
             return method;
         }
 
-        function findHeader(data) {
+        function findHeader(def, data) {
             var header = {};
 
             if (is.existy(data.header)) {
@@ -263,10 +290,19 @@ service('apiService', ['$http',
                 }
             }
 
+            var needAuth = def.auth || false;
+
+            if (needAuth && is.not.existy(header.Authorization)) {
+                if (is.not.existy(data.token) || is.empty(data.token)) {
+                    throw new Error('Request token could not be found in your data, it must contain the element named [token].');
+                }
+                header.Authorization = 'Bearer ' + data.token;
+            }
+
             return header;
         }
 
-        function findParameter(data) {
+        function findParameter(def, data) {
             var params = {};
 
             if (is.existy(data.params)) {
@@ -280,7 +316,7 @@ service('apiService', ['$http',
             return params;
         }
 
-        function findBody(data) {
+        function findBody(def, data) {
             var body = {};
 
             if (is.existy(data.body)) {
@@ -295,8 +331,8 @@ service('apiService', ['$http',
         }
     }
 ]).
-directive('api', ['$compile', '$state', 'toaster', 'apiService',
-    function($compile, $state, toaster, apiService) {
+directive('api', ['$compile', '$state', '$http', 'toaster', 'apiService',
+    function($compile, $state, $http, toaster, apiService) {
         return {
             // name: '',
             // priority: 1,
@@ -314,14 +350,9 @@ directive('api', ['$compile', '$state', 'toaster', 'apiService',
                 var mergedConfig = angular.extend({}, $scope.$eval(iAttrs.apiOptions)); // attr of attrs will be formatted like api-options -> apiOptions
 
                 $scope.config = {
-                    token: '',
                     apiGroup: mergedConfig['group'],
                     apiName: mergedConfig['name'],
-                    server: '',
-                    api: {
-                        uri: {},
-                        body: {}
-                    },
+                    api: {},
                     params: {},
                     uriProperties: [],
                     bodyProperties: []
@@ -349,7 +380,19 @@ directive('api', ['$compile', '$state', 'toaster', 'apiService',
                 }
 
                 $scope.done = function() {
-                    invokeApi($scope.config, $scope.api);
+                    //console.log(JSON.stringify($scope.config));
+                    //console.log(JSON.stringify($scope.api));
+
+                    var promise = apiService.execute($scope.config.api, $scope.api);
+                    promise.then(function(obj) {
+                        return success(obj.data, obj.status, obj.headers, obj.config, obj.statusText);
+                    }, function(obj) {
+                        return error(obj.data, obj.status, obj.headers, obj.config, obj.statusText);
+                    });
+                };
+
+                $scope.exit = function() {
+                    $state.reload();
                 };
 
                 function initParameters() {
@@ -378,8 +421,9 @@ directive('api', ['$compile', '$state', 'toaster', 'apiService',
                     }
 
                     $scope.config.servers = apiService.getServerNames();
-                    $scope.config.token = apiService.getToken();
+                    $scope.api.token = apiService.getToken();
                     var currentApi = apiService.getApi(group, name);
+
                     if (is.object(currentApi) && is.not.empty(currentApi)) {
                         apiService.setCurrentApi(currentApi);
                         $scope.config.api = currentApi;
@@ -637,88 +681,76 @@ directive('api', ['$compile', '$state', 'toaster', 'apiService',
                     return template;
                 }
 
-                function invokeApi(config, api) {
-                    var server = config.server;
-                    var uri = prepareUri(config.api.uri, api.uri);
-                    console.log('Request Target: ' + server + uri);
-
-                    var body = prepareBody(config.api.body, api.body);
-                    console.log('Request Body: ' + body);
-
-                    var header = prepareHeader(config.api.auth);
-                    console.log('Request Header: ' + header);
-
-                    $http({
-                        method: config.api.method,
-                        url: server + uri,
-                        body: body,
-                        headers: header
-                    }).success(function(data, status) {
-                        console.log(data);
-                        success();
-                    }).error(function(data, status) {
-                        console.log(data);
-                        error(status);
-                    });
-                }
-
-                function prepareUri(uri, properties) {
-                    var paths = uri.split('/');
-
-                    for (var i = 0; i < paths.length; i++) {
-                        if (paths[i] === '') {
-                            continue;
-                        }
-                        if (paths[i].indexOf(':') === 0) {
-                            var path = paths[i].substring(1, paths[i].length);
-                            uri = uri.replace(':' + path, properties[path]);
-                        }
-                    }
-
-                    return uri;
-                }
-
-                function prepareBody(body, properties) {
-                    if (!body || body.length === 0) {
-                        return '';
-                    }
-
-                    return JSON.stringify(properties);
-                }
-
-                function prepareHeader(needAuth) {
-                    needAuth = needAuth || false;
-
-                    if (needAuth) {
-                        return {
-                            Authorization: 'Bearer ' + $scope.config.token
-                        };
-                    } else {
-                        return {};
-                    }
-
-                }
-
-                function success() {
+                function success(data, status, headers, config, statusText) {
                     $scope.steps.percent = 100;
+                    $scope.response = JSON.stringify(data, undefined, 2);
                     toaster.pop({
                         type: 'success',
                         title: '提示',
-                        body: '操作成功!',
-                        onHideCallback: function() {
-                            $state.reload();
-                        }
+                        body: '操作成功!'
                     });
                 }
 
-                function error(e) {
+                function error(data, status, headers, config, statusText) {
+                    $scope.response = JSON.stringify(data, undefined, 2);
                     toaster.pop({
                         type: 'error',
                         title: '提示',
-                        body: '操作失败，错误信息：' + e
+                        body: '操作失败，错误信息：' + status
                     });
                 }
+
             }
         };
     }
-]);
+])
+// fix the bug: invalid date format of model binding by adding a custome directive, refer to:
+// http://stackoverflow.com/questions/24198669/angular-bootsrap-datepicker-date-format-does-not-format-ng-model-value#
+.directive('mydate', function(dateFilter, $parse) {
+    return {
+        restrict: 'EAC',
+        require: '?ngModel',
+        link: function(scope, element, attrs, ngModel, ctrl) {
+            ngModel.$parsers.push(function(viewValue) {
+                return dateFilter(viewValue, 'yyyy-MM-dd 00:00:00');
+            });
+        }
+    };
+})
+    .controller('DatepickerSimpleCtrl', ['$scope',
+        function($scope) {
+            $scope.today = function() {
+                $scope.dt = new Date();
+            };
+            $scope.today();
+
+            $scope.clear = function() {
+                $scope.dt = null;
+            };
+
+            // Disable weekend selection
+            $scope.disabled = function(date, mode) {
+                return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
+            };
+
+            $scope.toggleMin = function() {
+                $scope.minDate = $scope.minDate ? null : new Date();
+            };
+            $scope.toggleMin();
+
+            $scope.open = function($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+
+                $scope.opened = true;
+            };
+
+            $scope.dateOptions = {
+                formatYear: 'yy',
+                startingDay: 1,
+                class: 'datepicker'
+            };
+
+            $scope.initDate = new Date();
+        }
+    ]);

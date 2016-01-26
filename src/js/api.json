@@ -10,6 +10,37 @@
   ],
   "services": [
     {
+      "group": "test",
+      "apis": [
+        {
+          "name": "user_token",
+          "uri": "/:org/:app/token",
+          "method": "POST",
+          "auth": false,
+          "body": [
+            {
+              "property": "grant_type",
+              "dtype": "enum",
+              "required": true,
+              "options": [
+                "client_credentials"
+              ]
+            },
+            {
+              "property": "client_id",
+              "dtype": "text",
+              "required": true
+            },
+            {
+              "property": "client_secret",
+              "dtype": "text",
+              "required": true
+            }
+          ]
+        }
+      ]
+    },
+    {
       "group": "callback",
       "apis": [
         {
