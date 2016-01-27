@@ -25,6 +25,10 @@
                 "SENSITIVE_DOWNLOAD": "下载敏感词",
                 "SENSITIVE_PARSE": "测试敏感词",
                 "ANTI_SPAM": "反垃圾服务",
+                "BEHAVIOR_OPEN": "开通行为监测",
+                "BEHAVIOR_ADDUSER": "添加行为监测用户",
+                "BEHAVIOR_USERS": "查询行为监测用户",
+                "BEHAVIOR_RECORDS": "查询行为监测记录",
                 "PROXY": "海外代理"
             }
         }
@@ -116,6 +120,25 @@
             "org": "组织机构标识",
             "app": "应用标识",
             "content": "测试内容"
+        },
+        "behavior_open": {
+            "app": "App Key",
+            "state": "状态",
+            "operator": "操作者"
+        },
+        "behavior_addUser": {
+            "appKey": "App Key",
+            "appUser": "用户名",
+            "blackOrWhite": "黑名单或白名单",
+            "operator": "操作者"
+        },
+        "behavior_listUsers": {
+            "org": "组织机构标识",
+            "app": "应用标识"
+        },
+        "behavior_listRecords": {
+            "org": "组织机构标识",
+            "app": "应用标识"
         }
     }
 }

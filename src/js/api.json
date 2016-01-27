@@ -303,6 +303,79 @@
             }
           ],
           "auth": false
+        },
+        {
+          "name": "behavior_open",
+          "uri": "/antispam/behavior",
+          "method": "POST",
+          "auth": false,
+          "body": [
+            {
+              "property": "app",
+              "dtype": "text",
+              "required": true,
+              "tip": "org#app"
+            },
+            {
+              "property": "state",
+              "dtype": "enum",
+              "required": true,
+              "options": [
+                "on",
+                "off"
+              ]
+            },
+            {
+              "property": "operator",
+              "dtype": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "behavior_addUser",
+          "uri": "/antispam/behavior/users",
+          "method": "POST",
+          "auth": false,
+          "body": [
+            {
+              "property": "appKey",
+              "dtype": "text",
+              "required": true,
+              "tip": "org#app"
+            },
+            {
+              "property": "appUser",
+              "dtype": "text",
+              "required": true
+            },
+            {
+              "property": "blackOrWhite",
+              "dtype": "enum",
+              "required": true,
+              "options": [
+                "white",
+                "black"
+              ]
+            },
+            {
+              "property": "operator",
+              "dtype": "text",
+              "required": true
+            }
+          ]
+        },
+        {
+          "name": "behavior_listUsers",
+          "uri": "/antispam/behavior/users/:org/:app",
+          "method": "GET",
+          "auth": false
+        },
+        {
+          "name": "behavior_listRecords",
+          "uri": "/antispam/behavior/records/:org/:app",
+          "method": "GET",
+          "auth": false
         }
       ]
     }

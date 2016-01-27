@@ -25,6 +25,10 @@
                 "SENSITIVE_DOWNLOAD": "Download Sensitive Words",
                 "SENSITIVE_PARSE": "Test Sensitive Words",
                 "ANTI_SPAM": "Anti Spam",
+                "BEHAVIOR_OPEN": "Activate Behavior Monitor",
+                "BEHAVIOR_ADDUSER": "Add Monitored User",
+                "BEHAVIOR_USERS": "Get Monitored Users",
+                "BEHAVIOR_RECORDS": "Get Monitored Records",
                 "PROXY": "Oversea Proxy"
             }
         }
@@ -116,6 +120,25 @@
             "org": "Org",
             "app": "App",
             "content": "Test Content"
+        },
+        "behavior_open": {
+            "app": "App Key",
+            "state": "Status",
+            "operator": "Operator"
+        },
+        "behavior_addUser": {
+            "appKey": "App Key",
+            "appUser": "App User",
+            "blackOrWhite": "Add to Black/White List",
+            "operator": "Operator"
+        },
+        "behavior_listUsers": {
+            "org": "Org",
+            "app": "App"
+        },
+        "behavior_listRecords": {
+            "org": "Org",
+            "app": "App"
         }
     }
 }

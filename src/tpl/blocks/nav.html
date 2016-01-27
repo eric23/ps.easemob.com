@@ -101,12 +101,44 @@
     </ul>
   </li>
 
-  <li ui-sref-active="active">
-    <a ui-sref="app.ps.antispam">
+  <li>
+    <a href class="auto">      
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
       <i class="icon-umbrella icon text-info-dker"></i>
       <span class="font-bold" translate="aside.nav.ps.ANTI_SPAM"></span>
     </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.ps.ANTI_SPAM"></span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ps.behavior.open">
+          <span translate="aside.nav.ps.BEHAVIOR_OPEN"></span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ps.behavior.addUser">
+          <span translate="aside.nav.ps.BEHAVIOR_ADDUSER"></span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ps.behavior.listUsers">
+          <span translate="aside.nav.ps.BEHAVIOR_USERS"></span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ps.behavior.listRecords">
+          <span translate="aside.nav.ps.BEHAVIOR_RECORDS"></span>
+        </a>
+      </li>
+    </ul>
   </li>
+
   <li ui-sref-active="active">
     <a ui-sref="app.ps.apicall">
       <i class="icon-rocket icon text-info-dker"></i>

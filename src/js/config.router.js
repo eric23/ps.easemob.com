@@ -99,6 +99,27 @@ angular.module('app')
                   url: '/sensitive/parse',
                   templateUrl: 'tpl/ps/ps_sensitive_parse.html'
               })
+              // antispam behavior
+              .state('app.ps.behavior', {
+                  url: '/behavior',
+                  template: '<div ui-view class="fade-in-up"></div>'
+              })
+              .state('app.ps.behavior.open', {
+                  url: '/behavior/open',
+                  templateUrl: 'tpl/ps/ps_behavior_open.html'
+              })
+              .state('app.ps.behavior.addUser', {
+                  url: '/behavior/addUser',
+                  templateUrl: 'tpl/ps/ps_behavior_adduser.html'
+              })
+              .state('app.ps.behavior.listUsers', {
+                  url: '/behavior/listUsers',
+                  templateUrl: 'tpl/ps/ps_behavior_users.html'
+              })
+              .state('app.ps.behavior.listRecords', {
+                  url: '/behavior/listRecords',
+                  templateUrl: 'tpl/ps/ps_behavior_records.html'
+              })
 
 
               .state('app.dashboard-v1', {
