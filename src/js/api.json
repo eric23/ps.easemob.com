@@ -63,7 +63,7 @@
             },
             {
               "property": "msgTypes",
-              "dtype": "enum",
+              "dtype": "multi-enum",
               "options": [
                 "chat",
                 "chat_offline"
@@ -111,7 +111,7 @@
           "body": [
             {
               "property": "msgTypes",
-              "dtype": "enum",
+              "dtype": "multi-enum",
               "options": [
                 "chat",
                 "chat_offline"

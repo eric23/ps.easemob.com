@@ -308,8 +308,6 @@ service('apiService', ['$http',
             if (is.existy(data.params)) {
                 if (is.object(data.params) && is.not.empty(data.params)) {
                     params = data.params;
-                } else {
-                    throw new Error('Request params could not be empty if it exists.');
                 }
             }
 
@@ -322,8 +320,6 @@ service('apiService', ['$http',
             if (is.existy(data.body)) {
                 if (is.object(data.body) && is.not.empty(data.body)) {
                     body = data.body;
-                } else {
-                    throw new Error('Request body could not be empty if it exists.');
                 }
             }
 
@@ -455,6 +451,8 @@ directive('api', ['$compile', '$state', '$http', 'toaster', 'apiService',
                                     if (is.existy(bodyV) && is.not.string(bodyV)) {
                                         error += bodyP.property + ' is not a text. ';
                                     }
+                                    break;
+                                case 'multi-enum':
                                     break;
                                 default:
                                     throw new Error('Unexpected data type of ' + dtype);
@@ -596,6 +594,9 @@ directive('api', ['$compile', '$state', '$http', 'toaster', 'apiService',
                                     break;
                                 case 'large-text':
                                     html += renderTextarea(element.property, element.required, 'body', element.tip, element.help);
+                                    break;
+                                case 'multi-enum':
+                                    html += renderMultiEnumElement(element.property, element.options, element.required, 'body', element.tip, element.help);
                                     break;
                                 default:
                                     throw new Error('Unexpected data type of ' + element.dtype);
@@ -753,6 +754,41 @@ directive('api', ['$compile', '$state', '$http', 'toaster', 'apiService',
                         '<div class="col-sm-8">' +
                         '<textarea rows="6" name="' + name + '" placeholder="' + tip + '" class="form-control" ng-model="api.' + part + '.' + name + '" ' + requiredStr + '></textarea>' +
                         helpStr + '</div></div><div class="line line-dashed b-b line-lg pull-in"></div>';
+                    return template;
+                }
+
+                function renderMultiEnumElement(name, options, required, part, tip, help) {
+                    if (!name || name === '') {
+                        throw new Error('Name of a property could not be null or empty.');
+                    }
+
+                    if (!options || options.length === 0) {
+                        throw new Error('Options of an enum property [name=' + name + '] could not be null or empty.');
+                    }
+
+                    required = required || true;
+                    var requiredStr = required ? 'required' : '';
+                    tip = tip ? tip : '';
+                    var helpStr = help ? '<span class="help-block m-b-none">' + help + '</span>' : '';
+
+                    if ('uri' === part) {
+                        $scope.config.uriProperties.push(name);
+                    } else if ('body' === part) {
+                        $scope.config.bodyProperties.push(name);
+                    } else {
+                        throw new Error('Unexpected part type of ' + part);
+                    }
+
+                    var template = '<div class="form-group">' +
+                        '<label class="col-sm-2 control-label" translate="api.' + $scope.config.apiName + '.' + name + '">' + name + '</label>' +
+                        '<div class="col-sm-8">' +
+                        '<select multiple name="' + name + '" placeholder="' + tip + '" class="form-control" ng-model="api.' + part + '.' + name + '" ' + requiredStr + '>';
+
+                    for (var i = 0; i < options.length; i++) {
+                        template += '<option>' + options[i] + '</option>';
+                    }
+                    template += '</select>' + helpStr + '</div></div><div class="line line-dashed b-b line-lg pull-in"></div>';
+
                     return template;
                 }
 
