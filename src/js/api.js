@@ -172,7 +172,7 @@ service('apiService', ['$http',
             if (struct && is.not.empty(config.servers)) {
                 for (var i = 0; i < config.servers.length; i++) {
                     var server = config.servers[i];
-                    servers = servers && is.object(server) && is.not.empty(server) && is.url(server.name);
+                    servers = servers && is.object(server) && is.not.empty(server);// && is.url(server.name);
 
                     if (!servers) {
                         return false;

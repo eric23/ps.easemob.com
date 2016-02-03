@@ -6,6 +6,9 @@
     },
     {
       "name": "https://a1.easemob.com"
+    },
+    {
+      "name": "http://172.16.6.60"
     }
   ],
   "services": [
@@ -266,7 +269,7 @@
               "tip": "org#app"
             },
             {
-              "property": "wordList",
+              "property": "wordsList",
               "dtype": "large-text",
               "required": true,
               "tip": "word1,word2,word3...",

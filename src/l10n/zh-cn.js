@@ -110,7 +110,7 @@
         },
         "sensitive_upload": {
             "appKey": "App Key",
-            "wordList": "敏感词"
+            "wordsList": "敏感词"
         },
         "sensitive_download": {
             "org": "组织机构标识",

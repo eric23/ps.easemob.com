@@ -110,7 +110,7 @@
         },
         "sensitive_upload": {
             "appKey": "App Key",
-            "wordList": "Sensitive Words"
+            "wordsList": "Sensitive Words"
         },
         "sensitive_download": {
             "org": "Org",
