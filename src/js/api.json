@@ -1,11 +1,12 @@
 {
-  "token": "faketoken",
   "servers": [
     {
-      "name": "https://a1.sdb.easemob.com"
+      "name": "https://a1.sdb.easemob.com",
+      "token": "aaa"
     },
     {
-      "name": "https://a1.easemob.com"
+      "name": "https://a1.easemob.com",
+      "token": "bbb"
     },
     {
       "name": "http://172.16.6.60"

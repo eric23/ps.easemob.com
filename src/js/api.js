@@ -34,9 +34,14 @@ service('apiService', ['$http',
             return self.loaded;
         };
 
-        this.getToken = function() {
+        this.getToken = function(serverName) {
             if (self.loaded) {
-                return self.config.token;
+                for(var i=0; i<self.config.servers.length; i++) {
+                    if(serverName === self.config.servers[i].name) {
+                        return self.config.servers[i].token;
+                    }
+                }
+                console.log('Token was not found with server name:' + serverName);
             } else {
                 throw new Error(__not_initialized);
             }
@@ -165,7 +170,7 @@ service('apiService', ['$http',
         };
 
         function isValidConfig(config) {
-            var struct = is.object(config) && is.not.empty(config) && is.string(config.token) && is.not.empty(config.token) && is.array(config.servers) && is.array(config.services);
+            var struct = is.object(config) && is.not.empty(config) && is.array(config.servers) && is.array(config.services);
             console.log('struct validation passed: ' + struct);
 
             var servers = true;
@@ -293,6 +298,8 @@ service('apiService', ['$http',
             var needAuth = def.auth || false;
 
             if (needAuth && is.not.existy(header.Authorization)) {
+                data.token = self.getToken(data.server);
+
                 if (is.not.existy(data.token) || is.empty(data.token)) {
                     throw new Error('Request token could not be found in your data, it must contain the element named [token].');
                 }
@@ -494,7 +501,6 @@ directive('api', ['$compile', '$state', '$http', 'toaster', 'apiService',
                     }
 
                     $scope.config.servers = apiService.getServerNames();
-                    $scope.api.token = apiService.getToken();
                     var currentApi = apiService.getApi(group, name);
 
                     if (is.object(currentApi) && is.not.empty(currentApi)) {
