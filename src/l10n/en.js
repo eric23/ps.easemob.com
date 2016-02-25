@@ -6,6 +6,8 @@
                 "PRICE": "Price List",
                 "ENABLE_SERVICE": "Activate",
                 "SERVICE": "Professional Service",
+                "SERVICE_ON": "Professional Service(On)",
+                "SERVICE_OFF": "Professional Service(Off)",
                 "LOG_STORE": "Log Store",
                 "API_CALL": "Rest API Invocation",
                 "CALLBACK": "Callback",

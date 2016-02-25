@@ -6,6 +6,8 @@
                 "PRICE": "价格目录",
                 "ENABLE_SERVICE": "开通服务",
                 "SERVICE": "增值服务",
+                "SERVICE_ON": "增值服务(已上线)",
+                "SERVICE_OFF": "增值服务(待上线)",
                 "LOG_STORE": "聊天记录存储时间",
                 "API_CALL": "REST API调用次数",
                 "CALLBACK": "消息回调",
