@@ -5,8 +5,8 @@
  * Description
  */
 angular.module('acl', []).
-service('aclService', ['$http', '$state',
-    function($http, $state) {
+service('aclService', ['$http', '$state', '$cookies',
+    function($http, $state, $cookies) {
         var self = this;
         this.isLogin = false;
         this.currentUser;
@@ -28,6 +28,8 @@ service('aclService', ['$http', '$state',
                     if (u.user === user && u.password === password) {
                         self.isLogin = true;
                         self.currentUser = user;
+                        $cookies['easemob_ps_login'] = new Date().getTime() + 1000*60*60;
+                        $cookies['easemob_ps_user'] = self.currentUser;
                         return true;
                     }
                 }
@@ -39,7 +41,19 @@ service('aclService', ['$http', '$state',
         };
 
         this.logined = function() {
-            return self.isLogin;
+            if(self.isLogin) {
+                return true;
+            } else {
+                var expires = $cookies['easemob_ps_login'];
+                if(expires && expires > new Date().getTime()) {
+                    self.login = true;
+                    self.currentUser = $cookies['easemob_ps_user'];
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
         };
 
         this.logout = function() {

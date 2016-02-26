@@ -63,15 +63,15 @@ angular.module('app')
                   template: '<div ui-view class="fade-in-up"></div>'
               })
               .state('app.ps.callback.add', {
-                  url: '/callback/add',
+                  url: '/add',
                   templateUrl: 'tpl/ps/ps_callback_add.html'
               })
               .state('app.ps.callback.del', {
-                  url: '/callback/del',
+                  url: '/del',
                   templateUrl: 'tpl/ps/ps_callback_del.html'
               })
               .state('app.ps.callback.set', {
-                  url: '/callback/set',
+                  url: '/set',
                   templateUrl: 'tpl/ps/ps_callback_set.html'
               })
               .state('app.ps.callback.get', {
@@ -84,19 +84,19 @@ angular.module('app')
                   template: '<div ui-view class="fade-in-up"></div>'
               })
               .state('app.ps.sensitive.open', {
-                  url: '/sensitive/open',
+                  url: '/open',
                   templateUrl: 'tpl/ps/ps_sensitive_open.html'
               })
               .state('app.ps.sensitive.upload', {
-                  url: '/sensitive/upload',
+                  url: '/upload',
                   templateUrl: 'tpl/ps/ps_sensitive_upload.html'
               })
               .state('app.ps.sensitive.download', {
-                  url: '/sensitive/download',
+                  url: '/download',
                   templateUrl: 'tpl/ps/ps_sensitive_download.html'
               })
               .state('app.ps.sensitive.parse', {
-                  url: '/sensitive/parse',
+                  url: '/parse',
                   templateUrl: 'tpl/ps/ps_sensitive_parse.html'
               })
               // antispam behavior
@@ -105,20 +105,35 @@ angular.module('app')
                   template: '<div ui-view class="fade-in-up"></div>'
               })
               .state('app.ps.behavior.open', {
-                  url: '/behavior/open',
+                  url: '/open',
                   templateUrl: 'tpl/ps/ps_behavior_open.html'
               })
               .state('app.ps.behavior.addUser', {
-                  url: '/behavior/addUser',
+                  url: '/addUser',
                   templateUrl: 'tpl/ps/ps_behavior_adduser.html'
               })
               .state('app.ps.behavior.listUsers', {
-                  url: '/behavior/listUsers',
+                  url: '/listUsers',
                   templateUrl: 'tpl/ps/ps_behavior_users.html'
               })
               .state('app.ps.behavior.listRecords', {
-                  url: '/behavior/listRecords',
+                  url: '/listRecords',
                   templateUrl: 'tpl/ps/ps_behavior_records.html'
+              })
+              // common query
+              .state('app.ps.query', {
+                  url: '/query',
+                  template: '<div ui-view class="fade-in-up"></div>'
+              })
+              .state('app.ps.query.token', {
+                  url: '/token',
+                  templateUrl: 'tpl/ps/query/query_get_token.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                          function( $ocLazyLoad ){
+                              return $ocLazyLoad.load(['js/controllers/ps/query/token.js']);
+                          }]
+                  }
               })
 
 
