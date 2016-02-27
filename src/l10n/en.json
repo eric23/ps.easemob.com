@@ -146,5 +146,11 @@
       "org": "Org",
       "app": "App"
     }
+  },
+  "query": {
+    "token": {
+      "ORG": "Org",
+      "APP": "App"
+    }
   }
 }
