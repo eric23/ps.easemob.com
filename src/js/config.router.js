@@ -135,6 +135,16 @@ angular.module('app')
                           }]
                   }
               })
+              .state('app.ps.query.group', {
+                  url: '/user_in_group',
+                  templateUrl: 'tpl/ps/query/query_group_user.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                          function( $ocLazyLoad ){
+                              return $ocLazyLoad.load(['js/controllers/ps/query/group.js']);
+                          }]
+                  }
+              })
 
 
               .state('app.dashboard-v1', {

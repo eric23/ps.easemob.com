@@ -34,7 +34,8 @@
         "PROXY": "Oversea Proxy",
         "QUERY": "Common Query",
         "query": {
-          "GET_TOKEN": "Get Client Token"
+          "GET_TOKEN": "Get Client Token",
+          "USER_IN_GROUP": "Relationship of User and Group"
         }
       }
     }
@@ -151,6 +152,12 @@
     "token": {
       "ORG": "Org",
       "APP": "App"
+    },
+    "group": {
+      "ORG": "Org",
+      "APP": "App",
+      "GROUP": "Group Name",
+      "USER": "User Name"
     }
   }
 }
