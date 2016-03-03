@@ -60,4 +60,8 @@ app.controller('TokenController', ['$scope', '$http', 'toaster', 'apiService', f
                 });
     	});
     };
+
+	$scope.exit = function () {
+		$state.reload();
+	};
 }]);

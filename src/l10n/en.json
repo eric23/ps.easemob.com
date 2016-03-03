@@ -35,7 +35,8 @@
         "QUERY": "Common Query",
         "query": {
           "GET_TOKEN": "Get Client Token",
-          "USER_IN_GROUP": "Relationship of User and Group"
+          "USER_IN_GROUP": "Relationship of User and Group",
+          "CHAT_LOG": "Check Chat Log"
         }
       }
     }
@@ -158,6 +159,22 @@
       "APP": "App",
       "GROUP": "Group Name",
       "USER": "User Name"
+    },
+    "log": {
+      "ORG": "Org",
+      "APP": "App",
+      "KEYWORD": "Keyword",
+      "DATE": "Records in Last X Days",
+      "ONLYONE": "Fetch Only One Matched",
+      "1DAYS": "Last 1 Day",
+      "3DAYS": "Last 3 Days",
+      "7DAYS": "Last 7 Days",
+      "15DAYS": "Last 15 Days",
+      "30DAYS": "Last 30 Days",
+      "YES": "Yes",
+      "NO": "No",
+      "MAX": "Find in Max Records",
+      "UNLIMITED": "Find in All"
     }
   }
 }

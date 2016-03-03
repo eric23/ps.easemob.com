@@ -145,6 +145,16 @@ angular.module('app')
                           }]
                   }
               })
+              .state('app.ps.query.log', {
+                  url: '/chat_log',
+                  templateUrl: 'tpl/ps/query/query_chat_log.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                          function( $ocLazyLoad ){
+                              return $ocLazyLoad.load(['js/controllers/ps/query/log.js']);
+                          }]
+                  }
+              })
 
 
               .state('app.dashboard-v1', {

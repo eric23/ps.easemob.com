@@ -78,6 +78,10 @@ app.controller('GroupController', ['$scope', '$http', 'toaster', 'apiService', f
     	}, error);
     };
 
+    $scope.exit = function () {
+        $state.reload();
+    };
+
     function error(msg) {
         $scope.response = JSON.stringify(msg, undefined, 2);
         toaster.pop({
