@@ -32,3 +32,7 @@ $ npm start
 ### Location of Your Files
 1. Add your page fragments into 'tpl - ps'
 2. Add your controllers, services, directives, filters into 'tpl - js' 
+
+## API DSL
+1. 'js - api.json' and 'js - api.js' are the simple implementation of Rest Mock DSL, you can descibe your Rest API in api.json which will be explained by api.js.
+2. If you want to create a new page of API mock, you can easily use api directive provided by api.js in your page just like `<api api-Options="{'group':'callback', 'name':'callback_set'}"></api>`
